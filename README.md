@@ -1,2 +1,2 @@
 # Factor Investing
- Factor Investindo - Brasilian assests 
+ Factor Investing - Brasilian assests 
