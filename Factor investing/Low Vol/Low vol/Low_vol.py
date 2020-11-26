@@ -5,6 +5,8 @@ from pandas_datareader import data
 
 df = pd.read_excel(r'Cotações.xlsx', parse_dates=True, index_col=0)
 
+############################################################ Low Vol ##########################################################
+
 def columns(df):
     df.columns = df.columns.str[-6:]
     return df
