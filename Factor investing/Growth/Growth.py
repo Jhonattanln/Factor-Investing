@@ -69,7 +69,7 @@ values.sort_values(by=['Ranking'], inplace=True)
 assets = values.iloc[:20]
 assets.index
 
-stocks = ['POSI3.SA', 'JBSS3.SA', 'CSNA3.SA', 'RDNI3.SA', 'EMBR3.SA', 'USIM5.SA',
+stocks = ['POSI3.SA', 'PTBL3.SA', 'CSNA3.SA', 'RDNI3.SA', 'EMBR3.SA', 'USIM5.SA',
        'CEAB3.SA', 'ENAT3.SA', 'PRIO3.SA', 'LEVE3.SA']
 
 ### Potfolio
@@ -83,6 +83,7 @@ weights = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
 returns = df.pct_change().dropna()
 
 df['Portfolio'] = (1+returns.dot(weights)).cumprod().dropna()
+df
 
 norm = pd.DataFrame()
 for i in df:
@@ -104,5 +105,5 @@ ibov
 
 plt.plot(norm['Portfolio'])
 plt.plot(ibov['Ibov'])
-plt.legend(['Portfolio - Quality', 'Ibov'])
+plt.legend(['Portfolio - Growth', 'Ibov'])
 plt.show()
