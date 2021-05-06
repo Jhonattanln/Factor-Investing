@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from pandas_datareader import data
+
 
 ################################################### Preço Lucro #########################################################
 
@@ -69,8 +69,9 @@ stocks = ['ELET3.SA', 'BMEB4.SA', 'CGRA4.SA', 'LIGT3.SA', 'FESA4.SA', 'BRSR6.SA'
 ### Potfolio
 
 df = pd.DataFrame()
+from pandas_datareader import data
 for i in stocks:
-    df[i] = data.DataReader(i, data_source='yahoo', start='2020-01-01')['Adj Close']
+    df[i] = data.DataReader(i, data_source='yahoo', start='2020-01-01', end = '2020-12-31')['Adj Close']
 
 ### Portfolio returns
 weights = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
@@ -90,7 +91,7 @@ plt.show()
 
 ### Portfolio vs IBOV
 
-ibov = data.DataReader('^BVSP', data_source='yahoo', start='2020-01-01')
+ibov = data.DataReader('^BVSP', data_source='yahoo', start='2020-01-01', end = '2020-12-31')
 ibov.rename(columns = {'Adj Close':'IBOV'}, inplace=True)
 ibov.drop(ibov.columns[[0,1,2,3,4]], axis=1, inplace=True)
 ibov['Ibov'] = ibov['IBOV'].div(ibov['IBOV'].iloc[0]).mul(100)
@@ -100,3 +101,6 @@ plt.plot(norm['Portfolio'])
 plt.plot(ibov['Ibov'])
 plt.legend(['Portfolio - Value', 'Ibov'])
 plt.show()
+
+final = pd.concat([norm['Portfolio'], ibov['Ibov']], axis=1)
+final.to_excel('Value.xlsx')
